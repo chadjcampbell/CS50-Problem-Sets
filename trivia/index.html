@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What kind of bear is best? </h3>
+                <p id="q1"></p>
+                <button class="incorrect">Polar Bear </button>
+                <button class="correct">Black Bear </button>
+                <button class="incorrect">That's a ridiculous question</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What vegetable does Dwight Schrute farm? </h3>
+                <p id="q2"></p>
+                <input type="text" placeholder="apples?" id="veg"> <br>
+                <button id="submit">Submit </button>
+            </div>
+        </div>
+        <script>
+            let correct = document.querySelector('.correct');
+            correct.addEventListener("click", function(){
+            correct.style.backgroundColor = 'green';
+            document.querySelector('#q1').innerHTML = "<p>Correct!</p>";
+            setTimeout(function(){
+                correct.style.backgroundColor = '#d9edff'}, 3000);
+            });
+
+            let incorrect = document.querySelectorAll('.incorrect');
+            for (let i = 0; i < incorrect.length; i++)
+            {
+                incorrect[i].addEventListener("click", function(){
+                incorrect[i].style.backgroundColor = 'red';
+                document.querySelector('#q1').innerHTML = "<p>Incorrect!</p>";
+                setTimeout(function(){
+                    incorrect[i].style.backgroundColor = '#d9edff'}, 3000);
+                });
+            }
+            document.querySelector('#submit').addEventListener("click", function(){
+            let answer = document.querySelector('#veg');
+            if (answer.value.toLowerCase() == 'beets' || answer.value.toLowerCase() == 'beet')
+            {
+                answer.style.backgroundColor = 'green';
+                document.querySelector('#q2').innerHTML = "<p>Correct!</p>";
+                setTimeout(function(){
+                    answer.style.backgroundColor = 'white'}, 3000);
+            }
+            else
+            {
+                answer.style.backgroundColor = 'red';
+                document.querySelector('#q2').innerHTML = "<p>Incorrect!</p>";
+                setTimeout(function(){
+                    answer.style.backgroundColor = 'white'}, 3000);
+            }
+            });
+        </script>
+    </body>
+</html>

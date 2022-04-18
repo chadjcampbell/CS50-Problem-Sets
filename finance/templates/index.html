@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<table class=table>
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row  in rows %}
+            {% set price = lookup(row["symbol"]).get("price") %}
+            {% set stocktotal = price * (row["SUM(shares)"]) %}
+        {% if row["SUM(shares)"] != 0 %}
+        <tr>
+            <td>{{row["symbol"]}}</td>
+            <td>{{row["name"]}}</td>
+            <td>{{row["SUM(shares)"]}}</td>
+            <td>{{price | usd}}</td>
+            <td>{{stocktotal | usd}}</td>
+        <tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<h2> Cash: {{cash | usd}} </h2>
+<h2> Total Stocks & Cash: {{total | usd}} </h2>
+{% endblock %}

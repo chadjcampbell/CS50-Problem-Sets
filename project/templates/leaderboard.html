@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Leaderboard
+{% endblock %}
+
+{% block main %}
+<div class="mx-auto" style="width: 100px;">
+    <img src="/static/gameWheel.png" class="img-fluid mt-5" alt="Game Wheel Image">
+</div>
+<hr>
+<div class="container">
+<h4>Record a winner</h4>
+<form action="/leaderboard" method="post">
+<p>Tonight we played
+    <select class="mx-auto w-auto" name="game">
+                <option disabled selected>Game</option>
+                {% for game in games %}
+                    <option value="{{game["game"]}}">{{game["game"]}}</option>
+                {% endfor %}
+    </select>
+     and
+    <select class="mx-auto w-auto" name="name">
+        <option disabled selected>Name</option>
+        {% for names in family %}
+            <option value="{{names["name"]}}">{{names["name"]}}</option>
+        {% endfor %}
+    </select> won! <button class="btn btn-primary" type="submit">Submit</button></p>
+<hr>
+</div>
+<div class="container">
+<h2>The Leaderboard</h2>
+<hr>
+    <div class="section">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Win Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leader in leaders %}
+                <tr>
+                    <td>{{leader["winner"]}}</td>
+                    <td>{{leader["COUNT(winner)"]}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+<br>
+<br>
+<br>
+<hr>
+<h3>History</h3>
+<hr>
+    <div class="section">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Game</th>
+                    <th>Date Won</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for win in history %}
+                <tr>
+                    <td>{{win["winner"]}}</td>
+                    <td>{{win["game"]}}</td>
+                    <td>{{win["date"]}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

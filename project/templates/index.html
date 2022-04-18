@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block main %}
+<div class="mx-auto" style="width: 300px;">
+    <img src="/static/gameWheel.png" class="img-fluid mt-5" alt="Game Wheel Image">
+</div>
+<div class="container">
+  <h2>Hello, {{ user }}! Welcome to Family Game Night!</h2>
+  <hr>
+  <p>This website was created by Chad Campbell as a final project for the CS:50 course, which you can find a link to in the footer!</p>
+  <hr>
+  <p>Do you spend an hour with your family trying to decide which game to play for the night?</p>
+  <p>No one can agree and you need someone to blame when the game you picked inevitebly doesn't go someones way?</p>
+  <h4>Well we're here to help!</h4>
+  <p>You can add all of your games to our Family Game Night wheel and we'll pick for you!</p>
+  <p>You can even add your family members to keep track of who wins what games when you play. <i>In case your family is the competitive type</i></p>
+</div>
+{% endblock %}

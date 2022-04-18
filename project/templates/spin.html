@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Spin the Wheel!
+{% endblock %}
+
+{% block main %}
+<hr>
+<div class="container">
+<h2>What Are You Playing Tonight?</h2>
+<h6><i>Touch, or Click, to find out!</i></h6>
+<hr>
+</div>
+
+{% if options|length < 2 %}
+<div  class="d-flex justify-content-center">
+  <h2> Add at least 2 games to your account to activate the wheel! </h2>
+{% else %}
+<div  class="d-flex justify-content-center">
+  <div class="arrow-down"></div>
+</div>
+<div  class="d-flex justify-content-center">
+<canvas id="canvas" width="720" height="360"
+    onClick="startSpin();">
+</canvas>
+{% endif %}
+</div>
+<br>
+<br>
+<div  class="d-flex justify-content-center">
+<button class="btn btn-primary" type="submit" onClick="resetWheel();">Reset</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<script>
+
+// Wheel segment info for the color scheme, and games from user database
+const fillers = ['#2e944b', '#ea433b', '#f5b82e'];
+const options = {{options|safe}};
+
+let theWheel = new Winwheel({
+    'textFontSize'    : 14,         // Set default font size for the segments.
+    'textOrientation' : 'horizontal', // Make text vertial so goes down from the outside of wheel.
+    'textAlignment' : 'center',    // Align text to outside of wheel.
+    'responsive'   : true,
+    'numSegments'     : 0,         // Specify number of segments.
+    'segments'        :             // Define segments including colour and text.
+    [
+
+    ],
+    'animation' :           // Specify the animation to use.
+    {
+        'type'     : 'spinToStop',
+        'duration' : 10,
+        'spins'    : 3,
+        'callbackFinished' : alertPrize,  // Function to call whent the spinning has stopped.
+        'callbackSound'    : playSound,   // Called when the tick sound is to be played.
+        'soundTrigger'     : 'pin'        // Specify pins are to trigger the sound.
+    },
+    'pins' :                // Turn pins on.
+    {
+        'responsive'   : true,
+        'number'     : {{ options|length }},
+        'fillStyle'  : 'silver',
+        'outerRadius': 4,
+    }
+});
+
+// Filling the wheel segments with our games database options, with our color scheme
+for(var i=0, j=0; i < options.length; i++, j++) {
+  if (j>2) j=0;
+  theWheel.addSegment({
+        'text' : options[i],
+        'fillStyle' : fillers[j]
+  });
+}
+theWheel.draw();
+
+// Loads the tick audio sound in to an audio object.
+let audio = new Audio('/static/tick.mp3');
+
+// This function is called when the sound is to be played.
+function playSound()
+{
+    // Stop and rewind the sound if it already happens to be playing.
+    audio.pause();
+    audio.currentTime = 0;
+
+    // Play the sound.
+    audio.play();
+}
+
+// Called when the animation has finished.
+function alertPrize(indicatedSegment)
+{
+    // Display different message if win/lose/backrupt.
+    alert("Tonight you're playing " + indicatedSegment.text);
+}
+
+let wheelSpinning = false;
+
+function startSpin()
+{
+    theWheel.animation.spins = 10;
+    theWheel.startAnimation();
+}
+
+function resetWheel()
+{
+    theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+    theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+    theWheel.draw();                // Call draw to render changes to the wheel.
+    wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+}
+
+</script>
+
+{% endblock %}

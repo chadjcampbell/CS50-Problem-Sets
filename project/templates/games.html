@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Games!
+{% endblock %}
+
+{% block main %}
+<div class="mx-auto" style="width: 100px;">
+    <img src="/static/gameWheel.png" class="img-fluid mt-5" alt="Game Wheel Image">
+</div>
+<hr>
+<div class="container">
+<h2>Manage your games</h2>
+<hr>
+</div>
+<div class="container">
+    <div class="section">
+        <h3>Add a Game</h3>
+            <form action="/games" method="post">
+                <input autocomplete="off" autofocus name="game" placeholder="Game" type="text">
+                <input type="submit" value="Submit">
+            </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="section">
+        <h3>All Games</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                <tr>
+                    <td>{{game["game"]}}</td>
+                <td>
+                    <form action="/games" method="post">
+                        <input name="delete_game" type="hidden" value="{{ game["game"]}}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

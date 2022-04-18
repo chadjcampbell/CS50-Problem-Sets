@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Family!
+{% endblock %}
+
+{% block main %}
+<div class="mx-auto" style="width: 100px;">
+    <img src="/static/gameWheel.png" class="img-fluid mt-5" alt="Game Wheel Image">
+</div>
+<hr>
+<div class="container">
+<h2>Manage your family members</h2>
+<hr>
+</div>
+<div class="container">
+    <div class="section">
+        <h3>Add a Family member</h3>
+            <form action="/family" method="post">
+                <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+                <input type="submit" value="Submit">
+            </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="section">
+        <h3>All Family members</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for names in family %}
+                <tr>
+                    <td>{{names["name"]}}</td>
+                <td>
+                    <form action="/family" method="post">
+                        <input name="delete_name" type="hidden" value="{{ names["name"]}}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

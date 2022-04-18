@@ -1,0 +1,39 @@
+body {
+    height: 100vh;
+    background-image: url("https://i.ytimg.com/vi/FsYdgKO4AQU/maxresdefault.jpg");
+    background-color: #000000;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    font-size: 1.4rem;
+}
+
+ul {
+    background-color: #ffffff;
+    height: 6%;
+}
+
+form {
+    color: #000000;
+    background-color: #ffffff;
+    text-align: left;
+    width: auto;
+    padding: 10px;
+}
+
+h1,p {
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
+    width: 80%;
+    margin-top: 50px;
+    text-align:center;
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.space {
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <form action="/login" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <br>
+    <br>
+    <p> Feel free to register an account with the nav element up top, but please don't use a common password. I'm still learning and security may not be perfect :) </p>
+    <p> If you'd just like to test the app, login with-- </p>
+    <p> username: chad </p>
+    <p> password: chad1 <p>
+{% endblock %}

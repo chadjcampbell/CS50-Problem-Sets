@@ -1,0 +1,22 @@
+sort1 uses: Bubble Sort
+
+How do you know?:
+On a large random list it had the longest runtime,
+but on a sorted list was much faster.
+So the upper bound was much higher than the lower bound.
+
+
+sort2 uses: Merge Sort
+
+How do you know?:
+This method had a similar runtime no matter if the data
+was random, sorted, or reversed. It was MUCH faster than
+the other two.
+
+
+sort3 uses: Selection Sort
+
+How do you know?:
+On a random list this was faster than sort1(bubble), but much slower
+than sort2(merge). On a sorted listed it did not improve. The
+upper and lower bounds are the same.
